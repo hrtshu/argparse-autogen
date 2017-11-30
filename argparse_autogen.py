@@ -113,7 +113,7 @@ def autospec(parser, func, argument_overrides=None):
                 kwargs['help'] = param_doc['description']
 
         if param.kind == inspect.Parameter.VAR_POSITIONAL:
-            kwargs['nargs'] = '+'
+            kwargs['nargs'] = '*'
         elif param.kind == inspect.Parameter.VAR_KEYWORD:
             kwargs['nargs'] = '*'
             if kwargs['help'] == param_name:
