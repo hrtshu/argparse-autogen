@@ -128,6 +128,14 @@ def autospec(parser, func, argument_overrides=None):
                 kwargs['nargs'] = '?'
             kwargs['default'] = param.default
 
+        try:
+            param.annotation
+        except AttributeError:  # Python < 3.5
+            pass
+        else:
+            if param.annotation is not inspect._empty:
+                kwargs['type'] = param.annotation
+
         if isinstance(param.default, bool):
             if param.default:
                 kwargs['action'] = 'store_false'
