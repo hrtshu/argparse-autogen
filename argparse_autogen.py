@@ -120,6 +120,8 @@ def autospec(parser, func, argument_overrides=None):
                 kwargs['help'] = 'Optional keyword arguments. Specify them as key=value'
         elif param.kind == inspect.Parameter.KEYWORD_ONLY:
             param_name = '--' + param_name
+            if param.default is inspect._empty:
+                kwargs['required'] = True
 
         if param.default is not inspect._empty:
             kwargs['default'] = param.default
