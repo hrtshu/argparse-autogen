@@ -124,6 +124,8 @@ def autospec(parser, func, argument_overrides=None):
                 kwargs['required'] = True
 
         if param.default is not inspect._empty:
+            if param.kind != inspect.Parameter.KEYWORD_ONLY:
+                kwargs['nargs'] = '?'
             kwargs['default'] = param.default
 
         if isinstance(param.default, bool):
