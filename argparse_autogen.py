@@ -136,7 +136,8 @@ def autospec(parser, func, argument_overrides=None):
             if param.annotation is not inspect._empty:
                 kwargs['type'] = param.annotation
 
-        if isinstance(param.default, bool):
+        if isinstance(param.default, bool) and \
+                'type' in kwargs and issubclass(kwargs['type'], bool):
             if param.default:
                 kwargs['action'] = 'store_false'
             else:
